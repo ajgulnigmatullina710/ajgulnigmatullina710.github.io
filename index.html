@@ -1,0 +1,77 @@
+<html lang="ru"><head>
+<meta charset="UTF-8">
+<title>Система бронирования отеля</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; }
+  label { display: block; margin-top: 10px; }
+  button { margin-top: 15px; }
+  #result { margin-top: 20px; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h2>Бронирование номера</h2>
+
+<!-- Вводные данные -->
+<label>
+  Есть свободные номера:
+  <select id="availability">
+    <option value="да">да</option>
+    <option value="нет">нет</option>
+  </select>
+</label>
+
+<label>
+  Платёж одобрен:
+  <select id="payment">
+    <option value="да">да</option>
+    <option value="нет">нет</option>
+  </select>
+</label>
+
+<label>
+  Специальное предложение:
+  <select id="specialOffer">
+    <option value="да">да</option>
+    <option value="нет">нет</option>
+  </select>
+</label>
+
+<button onclick="processBooking()">Обработать бронирование</button>
+
+<div id="result"></div>
+
+<script>
+function processBooking() {
+  // Получение значений условий
+  const availability = document.getElementById('availability').value;
+  const payment = document.getElementById('payment').value;
+  const specialOffer = document.getElementById('specialOffer').value;
+
+  const resultDiv = document.getElementById('result');
+
+  // Логика принятия решения
+  if (availability === 'нет') {
+    resultDiv.textContent = 'Отказать в бронировании (нет свободных номеров).';
+    return;
+  }
+
+  if (payment !== 'да') {
+    resultDiv.textContent = 'Отказать в бронировании (платёж не одобрен).';
+    return;
+  }
+
+  // Если есть специальное предложение
+  if (specialOffer === 'да') {
+    // Применить скидку
+    resultDiv.textContent = 'Бронирование подтверждено. Применена скидка.';
+  } else {
+    // Просто подтвердить бронирование
+    resultDiv.textContent = 'Бронирование подтверждено.';
+  }
+}
+</script>
+
+
+
+</body></html>
